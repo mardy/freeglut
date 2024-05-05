@@ -734,6 +734,7 @@ ADD_SAMPLE(swift11 tutorials/swiftless11.cpp)
 ADD_SAMPLE(swift12 tutorials/swiftless12.cpp)
 ADD_SAMPLE(swift13 tutorials/swiftless13.cpp)
 ADD_SAMPLE(swift14 tutorials/swiftless14.cpp)
+ADD_SAMPLE(swift16 tutorials/swiftless16.cpp)
 
 ADD_SAMPLE(boids tutorials/rosetta-boids.c)
 
