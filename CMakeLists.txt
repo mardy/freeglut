@@ -740,6 +740,7 @@ ADD_SAMPLE(swift21 tutorials/swiftless21.cpp)
 ADD_SAMPLE(call-lists tutorials/call-lists.cpp)
 
 ADD_SAMPLE(boids tutorials/rosetta-boids.c)
+ADD_SAMPLE(textures tutorials/textures.cpp)
 
 
 # pkg-config support, to install at $(libdir)/pkgconfig
