@@ -741,6 +741,7 @@ ADD_SAMPLE(call-lists tutorials/call-lists.cpp)
 
 ADD_SAMPLE(boids tutorials/rosetta-boids.c)
 ADD_SAMPLE(textures tutorials/textures.cpp)
+ADD_SAMPLE(picking tutorials/picking.c)
 
 
 # pkg-config support, to install at $(libdir)/pkgconfig
