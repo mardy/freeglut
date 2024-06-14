@@ -735,6 +735,7 @@ ADD_SAMPLE(swift12 tutorials/swiftless12.cpp)
 ADD_SAMPLE(swift13 tutorials/swiftless13.cpp)
 ADD_SAMPLE(swift14 tutorials/swiftless14.cpp)
 ADD_SAMPLE(swift16 tutorials/swiftless16.cpp)
+ADD_SAMPLE(swift17 tutorials/swiftless17.cpp)
 ADD_SAMPLE(swift21 tutorials/swiftless21.cpp)
 
 ADD_SAMPLE(call-lists tutorials/call-lists.cpp)
