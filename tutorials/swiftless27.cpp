@@ -58,7 +58,7 @@ void bench (void) {
     glPushMatrix();
     glColor4f(1,1,1,0.7);
     glBindTexture(GL_TEXTURE_2D,texture[1]);
-    glTranslatef(0,-2.5,0);
+    glTranslatef(0,-5,0);
     glScalef(4,2,4);
     glBegin(GL_QUADS);
         glTexCoord2f(1,0);
