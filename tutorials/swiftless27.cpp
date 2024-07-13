@@ -150,7 +150,18 @@ void reshape (int w, int h) {
     glMatrixMode (GL_MODELVIEW);
 }
 
+void joystick(unsigned int buttons, int axis0, int axis1, int axis2)
+{
+    static unsigned int old = 0;
+
+    unsigned int pressed = (buttons ^ old) & buttons;
+    old = buttons;
+
+    if (pressed) exit(0);
+}
+
 int main (int argc, char **argv) {
+    setenv("OPENGX_DEBUG", "stencil", 1);
     glutInit (&argc, argv);
     glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGBA | GLUT_STENCIL); //add a stencil buffer to the window
     glutInitWindowSize (500, 500);
@@ -159,6 +170,7 @@ int main (int argc, char **argv) {
     init();
     glutDisplayFunc (display);
     glutIdleFunc (display);
+    glutJoystickFunc (joystick, 10);
     glutReshapeFunc (reshape);
     glutMainLoop ();
     return 0;
