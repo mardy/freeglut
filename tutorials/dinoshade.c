@@ -324,10 +324,10 @@ drawDinosaur(void)
 }
 
 static GLfloat floorVertices[4][3] = {
-  { -20.0, 0.0, 20.0 },
-  { 20.0, 0.0, 20.0 },
-  { 20.0, 0.0, -20.0 },
-  { -20.0, 0.0, -20.0 },
+  { -10.0, 0.0, 10.0 },
+  { 10.0, 0.0, 10.0 },
+  { 10.0, 0.0, -10.0 },
+  { -10.0, 0.0, -10.0 },
 };
 
 /* Draw a floor (possibly textured). */
@@ -785,6 +785,7 @@ main(int argc, char **argv)
 {
   int i;
 
+  setenv("OPENGX_DEBUG", "stencil", 1);
   glutInit(&argc, argv);
 
   for (i=1; i<argc; i++) {
