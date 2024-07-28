@@ -743,6 +743,7 @@ ADD_SAMPLE(swift27 tutorials/swiftless27.cpp)
 ADD_SAMPLE(call-lists tutorials/call-lists.cpp)
 
 ADD_SAMPLE(boids tutorials/rosetta-boids.c)
+ADD_SAMPLE(colored_tri tutorials/colored_tri.c)
 ADD_SAMPLE(textures tutorials/textures.cpp)
 ADD_SAMPLE(picking tutorials/picking.c)
 ADD_SAMPLE(dinoshade tutorials/dinoshade.c)
