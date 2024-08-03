@@ -747,6 +747,7 @@ ADD_SAMPLE(colored_tri tutorials/colored_tri.c)
 ADD_SAMPLE(textures tutorials/textures.cpp)
 ADD_SAMPLE(picking tutorials/picking.c)
 ADD_SAMPLE(dinoshade tutorials/dinoshade.c)
+ADD_SAMPLE(double tutorials/double.c)
 
 
 # pkg-config support, to install at $(libdir)/pkgconfig
