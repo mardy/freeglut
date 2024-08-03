@@ -750,6 +750,7 @@ ADD_SAMPLE(dinoshade tutorials/dinoshade.c)
 ADD_SAMPLE(double tutorials/double.c)
 ADD_SAMPLE(lines tutorials/lines.c)
 ADD_SAMPLE(polys tutorials/polys.c)
+ADD_SAMPLE(varray tutorials/varray.c)
 
 
 # pkg-config support, to install at $(libdir)/pkgconfig
