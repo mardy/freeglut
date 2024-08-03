@@ -14,6 +14,10 @@ void display() {
     // Set every pixel in the frame buffer to the current clear color.
     glClear(GL_COLOR_BUFFER_BIT);
 
+    glScalef(0.5f, 1, 1);
+
+    glPushMatrix();
+    glTranslatef(1, 0, 0);
     // Drawing is done by specifying a sequence of vertices.  The way these
     // vertices are connected (or not connected) depends on the argument to
     // glBegin.  GL_POLYGON constructs a filled polygon.
@@ -22,6 +26,48 @@ void display() {
     glColor3f(0, 1, 0); glVertex3f(0.6, -0.75, 0);
     glColor3f(0, 0, 1); glVertex3f(0, 0.75, 0);
     glEnd();
+    glPopMatrix();
+
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
+
+    {
+        glPushMatrix();
+        glTranslatef(0, 0, 0);
+        float vertices[] = {
+            -0.6, -0.75,
+            0.6, -0.75,
+            0, 0.75,
+        };
+        float colors[] = {
+            1, 0, 0,
+            0, 1, 0,
+            0, 0, 1,
+        };
+        glVertexPointer(2, GL_FLOAT, 0, vertices);
+        glColorPointer(3, GL_FLOAT, 0, colors);
+        glDrawArrays(GL_POLYGON, 0, 3);
+        glPopMatrix();
+    }
+
+    {
+        glPushMatrix();
+        glTranslatef(-1, 0, 0);
+        float vertices[] = {
+            -0.6, -0.75, 0.5,
+            0.6, -0.75, 0,
+            0, 0.75, 0,
+        };
+        uint8_t colors[] = {
+            255, 0, 0,
+            0, 255, 0,
+            0, 0, 255,
+        };
+        glVertexPointer(3, GL_FLOAT, 0, vertices);
+        glColorPointer(3, GL_UNSIGNED_BYTE, 0, colors);
+        glDrawArrays(GL_POLYGON, 0, 3);
+        glPopMatrix();
+    }
 
     // Flush drawing command buffer to make drawing happen as soon as possible.
     glFlush();
