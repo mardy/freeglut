@@ -39,6 +39,7 @@
  */
 #include <GL/glut.h>
 #include <stdlib.h>
+#include <math.h>
 
 void init(void) 
 {
@@ -48,14 +49,16 @@ void init(void)
 
 void display(void)
 {
-   GLdouble eqn[4] = {0.0, 1.0, 0.0, 0.0};
-   GLdouble eqn2[4] = {1.0, 0.0, 0.0, 0.0};
+    static float var = 0.0f;
+    var += 0.01;
+   GLdouble eqn[4] = {0.0, 1.0, 0.0, 0.5 + sinf(var)/ 2};
+   GLdouble eqn2[4] = {1.0, 0.0, cosf(var), 0.8};
 
-   glClear(GL_COLOR_BUFFER_BIT);
+   glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT);
 
-   glColor3f (1.0, 1.0, 1.0);
+   glColor3f (1.0, 0.8, 0.8);
    glPushMatrix();
-   glTranslatef (0.0, 0.0, -5.0);
+   glTranslatef (-1.0, -1.5, -5.0);
 
 /*    clip lower half -- y < 0          */
    glClipPlane (GL_CLIP_PLANE0, eqn);
@@ -64,8 +67,16 @@ void display(void)
    glClipPlane (GL_CLIP_PLANE1, eqn2);
    glEnable (GL_CLIP_PLANE1);
 
+   if (1) {
+       GLdouble eqn3[4] = {0.2, -1.0, 0.0, 0.3+sinf(var) / 3};
+       glClipPlane (GL_CLIP_PLANE2, eqn3);
+       glEnable (GL_CLIP_PLANE2);
+       GLdouble eqn4[4] = {0.0, 0.0, 1.0, 0.0};
+       glClipPlane (GL_CLIP_PLANE3, eqn4);
+       //glEnable (GL_CLIP_PLANE3);
+   }
    glRotatef (90.0, 1.0, 0.0, 0.0);
-   glutWireSphere(1.0, 20, 16);
+   glutSolidSphere(1.0, 20, 20);
    glPopMatrix();
 
    glFlush ();
@@ -78,6 +89,15 @@ void reshape (int w, int h)
    glLoadIdentity ();
    gluPerspective(60.0, (GLfloat) w/(GLfloat) h, 1.0, 20.0);
    glMatrixMode (GL_MODELVIEW);
+   glEnable(GL_LIGHTING);
+   glEnable(GL_LIGHT0);
+    GLfloat DiffuseLight[] = {0.0, 1.0, 1.0}; //set DiffuseLight[] to the specified values
+    glLightfv (GL_LIGHT1, GL_DIFFUSE, DiffuseLight);
+    GLfloat LightPosition[] = {-3.0, 2.0, -6.0, 0.0};
+    glLightfv (GL_LIGHT1, GL_POSITION, LightPosition); //change the light accordingly
+   glEnable(GL_LIGHT1);
+   glDisable(GL_CULL_FACE);
+   glEnable(GL_DEPTH_TEST);
 }
 
 void keyboard(unsigned char key, int x, int y)
@@ -91,13 +111,16 @@ void keyboard(unsigned char key, int x, int y)
 
 int main(int argc, char** argv)
 {
+   setenv("OPENGX_DEBUG", "clipping", 1);
+
    glutInit(&argc, argv);
-   glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
+   glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
    glutInitWindowSize (500, 500); 
    glutInitWindowPosition (100, 100);
    glutCreateWindow ("test");
    init ();
    glutDisplayFunc(display); 
+   glutIdleFunc(display); 
    glutReshapeFunc(reshape);
    glutKeyboardFunc(keyboard);
    glutMainLoop();
