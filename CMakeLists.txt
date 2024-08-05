@@ -752,6 +752,7 @@ ADD_SAMPLE(double tutorials/double.c)
 ADD_SAMPLE(lines tutorials/lines.c)
 ADD_SAMPLE(model tutorials/model.c)
 ADD_SAMPLE(polys tutorials/polys.c)
+ADD_SAMPLE(unproject tutorials/unproject.c)
 ADD_SAMPLE(varray tutorials/varray.c)
 
 
