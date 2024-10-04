@@ -744,6 +744,7 @@ ADD_SAMPLE(call-lists tutorials/call-lists.cpp)
 
 ADD_SAMPLE(accanti tutorials/accanti.c)
 ADD_SAMPLE(accum tutorials/accum.c)
+ADD_SAMPLE(bitmap1 tutorials/bitmap1.c)
 ADD_SAMPLE(boids tutorials/rosetta-boids.c)
 ADD_SAMPLE(colored_tri tutorials/colored_tri.c)
 ADD_SAMPLE(textures tutorials/textures.cpp)
