@@ -142,17 +142,30 @@ void keyboard(unsigned char key, int x, int y)
    }
 }
 
+void joystick(unsigned int buttons, int axis0, int axis1, int axis2)
+{
+    static unsigned int old = 0;
+
+    unsigned int pressed = (buttons ^ old) & buttons;
+    old = buttons;
+
+    if (pressed & 0x1) keyboard('r', 0, 0);
+    if (pressed & 0x2) keyboard('z', 0, 0);
+    if (pressed & 0x4) keyboard('Z', 0, 0);
+}
+
 int main(int argc, char** argv)
 {
    glutInit(&argc, argv);
    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-   glutInitWindowSize(250, 250);
+   glutInitWindowSize(640, 480);
    glutInitWindowPosition(100, 100);
    glutCreateWindow(argv[0]);
    init();
    glutDisplayFunc(display);
    glutReshapeFunc(reshape);
    glutKeyboardFunc(keyboard);
+   glutJoystickFunc (joystick, 10);
    glutMotionFunc(motion);
    glutMainLoop();
    return 0;

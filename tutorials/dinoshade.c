@@ -759,6 +759,16 @@ key(unsigned char c, int x, int y)
   glutPostRedisplay();
 }
 
+void joystick(unsigned int buttons, int axis0, int axis1, int axis2)
+{
+    static unsigned int old = 0;
+
+    unsigned int pressed = (buttons ^ old) & buttons;
+    old = buttons;
+
+    if (pressed & 0x4) exit(0);
+}
+
 /* Press any key to redraw; good when motion stopped and
    performance reporting on. */
 /* ARGSUSED */
@@ -819,6 +829,7 @@ main(int argc, char **argv)
   glutMotionFunc(motion);
   glutVisibilityFunc(visible);
   glutKeyboardFunc(key);
+  glutJoystickFunc(joystick, 10);
   glutSpecialFunc(special);
 
   glutCreateMenu(controlLights);
