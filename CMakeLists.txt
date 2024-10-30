@@ -759,6 +759,7 @@ ADD_SAMPLE(model tutorials/model.c)
 ADD_SAMPLE(polys tutorials/polys.c)
 ADD_SAMPLE(unproject tutorials/unproject.c)
 ADD_SAMPLE(varray tutorials/varray.c)
+ADD_SAMPLE(vbocubetex tutorials/vboCubeTex.cpp tutorials/Bmp.cpp tutorials/glExtension.cpp)
 
 
 # pkg-config support, to install at $(libdir)/pkgconfig
