@@ -29,6 +29,36 @@
 //using std::endl;
 using namespace Image;
 
+#if __BYTE_ORDER__ ==  __ORDER_LITTLE_ENDIAN__
+#define le2h(x) x
+#else
+#define le2h(x) swap_endian<typeof(x)>::swap(x)
+#endif
+
+template<typename T>
+class swap_endian
+{
+    constexpr static size_t sz_minus_one = sizeof(T) - 1;
+    template<size_t> struct tag_s {};
+
+    constexpr static T bitwise_or(tag_s<0>, T original, T res)
+    {
+        return res | (original >> sz_minus_one * 8);
+    }
+
+    template<size_t i>
+    constexpr static T bitwise_or(tag_s<i>, T original, T res)
+    {
+        return bitwise_or(tag_s<i - 1>(), original,
+                          res | original << i * 8 >> sz_minus_one * 8 << i * 8);
+    }
+
+public:
+    constexpr static T swap(T u)
+    {
+        return bitwise_or(tag_s<sz_minus_one>(), u, 0);
+    }
+};
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -210,6 +240,12 @@ bool Bmp::read(const char* fileName)
     inFile.read((char*)&bitCount, 2);           // 1, 4, 8, 24, or 32
     inFile.read((char*)&compression, 4);        // 0(uncompressed), 1(8-bit RLE), 2(4-bit RLE), 3(RGB with mask)
     inFile.read((char*)&dataSizeWithPaddings, 4);
+    width = le2h(width);
+    height = le2h(height);
+    planeCount = le2h(planeCount);
+    bitCount = le2h(bitCount);
+    compression = le2h(compression);
+    dataOffset = le2h(dataOffset);
     //inFile.read((char*)&xResolution, 4);
     //inFile.read((char*)&yResolution, 4);
     //inFile.read((char*)&colorCount, 4);
