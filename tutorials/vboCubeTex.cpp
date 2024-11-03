@@ -32,6 +32,7 @@ void reshapeCB(int w, int h);
 void timerCB(int millisec);
 void idleCB();
 void keyboardCB(unsigned char key, int x, int y);
+void joystickCB(unsigned int buttons, int axis0, int axis1, int axis2);
 void mouseCB(int button, int stat, int x, int y);
 void mouseMotionCB(int x, int y);
 
@@ -270,11 +271,12 @@ int initGLUT(int argc, char **argv)
 
     // register GLUT callback functions
     glutDisplayFunc(displayCB);
-    glutTimerFunc(33, timerCB, 33);                 // redraw only every given millisec
-    //glutIdleFunc(idleCB);                           // redraw when idle
+    //glutTimerFunc(33, timerCB, 33);                 // redraw only every given millisec
+    glutIdleFunc(idleCB);                           // redraw when idle
     glutReshapeFunc(reshapeCB);
     glutKeyboardFunc(keyboardCB);
     glutMouseFunc(mouseCB);
+    glutJoystickFunc(joystickCB, 10);
     glutMotionFunc(mouseMotionCB);
 
     return handle;
@@ -725,6 +727,17 @@ void keyboardCB(unsigned char key, int x, int y)
     }
 }
 
+void joystickCB(unsigned int buttons, int axis0, int axis1, int axis2)
+{
+    static unsigned int old = 0;
+
+    unsigned int pressed = (buttons ^ old) & buttons;
+    old = buttons;
+
+    if (pressed & 0x1) keyboardCB(' ', 0, 0);
+    if (pressed & 0x2) keyboardCB('d', 0, 0);
+    if (pressed & 0x4) keyboardCB('D', 0, 0);
+}
 
 void mouseCB(int button, int state, int x, int y)
 {
