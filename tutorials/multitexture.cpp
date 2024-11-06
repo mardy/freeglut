@@ -114,22 +114,22 @@ void square (void) {
     //glRotatef( angle, 1.0f, 1.0f, 1.0f );
     glBegin (GL_QUADS);
     glTexCoord2f(0.0,0.0);
-    glMultiTexCoord2f(GL_TEXTURE1, 0.0, 0.0);
+//    glMultiTexCoord2f(GL_TEXTURE1, 0.0, 0.0);
     glMultiTexCoord2f(GL_TEXTURE2, 0.0, 0.0);
     glVertex2f(-2.0,-1.0);
 
     glTexCoord2f(1.0,0.0);
-    glMultiTexCoord2f(GL_TEXTURE1, 1.0, 0.0);
+//    glMultiTexCoord2f(GL_TEXTURE1, 1.0, 0.0);
     glMultiTexCoord2f(GL_TEXTURE2, 1.0, 0.0);
     glVertex2f(+2.0,-1.0);
 
     glTexCoord2f(1.0,1.0);
-    glMultiTexCoord2f(GL_TEXTURE1, 1.0,1.0);
+//    glMultiTexCoord2f(GL_TEXTURE1, 1.0,1.0);
     glMultiTexCoord2f(GL_TEXTURE2, 1.0,1.0);
     glVertex2f(+2.0,+1.0);
 
     glTexCoord2f(0.0,1.0);
-    glMultiTexCoord2f(GL_TEXTURE1, 0.0,1.0);
+//    glMultiTexCoord2f(GL_TEXTURE1, 0.0,1.0);
     glMultiTexCoord2f(GL_TEXTURE2, 0.0,1.0);
     glVertex2f(-2.0,+1.0);
 
@@ -176,6 +176,8 @@ void display (void) {
 
     glActiveTexture(GL_TEXTURE1);
     glEnable(GL_TEXTURE_2D);
+    glEnable(GL_TEXTURE_GEN_S);
+    glEnable(GL_TEXTURE_GEN_T);
     glBindTexture(GL_TEXTURE_2D, circle2_tex);
     glLoadIdentity();
     glScalef(scale, scale, 1.0);
