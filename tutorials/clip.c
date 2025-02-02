@@ -41,6 +41,8 @@
 #include <stdlib.h>
 #include <math.h>
 
+static float t0;
+
 void init(void) 
 {
    glClearColor (0.0, 0.0, 0.0, 0.0);
@@ -49,8 +51,9 @@ void init(void)
 
 void display(void)
 {
-    static float var = 0.0f;
-    var += 0.01;
+    float now = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
+    float var = now - t0;
+
    GLdouble eqn[4] = {0.0, 1.0, 0.0, 0.5 + sinf(var)/ 2};
    GLdouble eqn2[4] = {1.0, 0.0, cosf(var), 0.8};
 
@@ -123,6 +126,7 @@ int main(int argc, char** argv)
    glutIdleFunc(display); 
    glutReshapeFunc(reshape);
    glutKeyboardFunc(keyboard);
+   t0 = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
    glutMainLoop();
    return 0;
 }
